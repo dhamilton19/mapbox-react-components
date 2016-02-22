@@ -1,0 +1,28 @@
+#map{
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.circle{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    left: -10px;
+    /*border: 1px solid red;*/
+    /*background: rgba(255,0,0,0.3);*/
+    /*border-radius: 20px;*/
+}
+
+.center-circle{
+    top: -20px;
+    left: -8px;
+}
+
+.center-circle > span{
+    font-size: 35px !important;
+    color: red;
+}
