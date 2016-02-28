@@ -53,7 +53,7 @@ export default class Map extends Component {
     componentWillReceiveProps(props) {
         const { center } = props;
 
-        if(this.center !== center){
+        if(_.difference(this.center, center).length > 0){
             this.center = center;
             this.map.setView(this.center, 9);
         }
