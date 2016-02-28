@@ -39,16 +39,25 @@ export default class Map extends Component {
             zoomControl
         };
 
-        _.omit(options, _.isNull);
+        this.center = center;
 
-        const map = L.mapbox.map(document.getElementById('map'), layer, options);
-        if(zoomControlPosition) new L.Control.Zoom({position: zoomControlPosition}).addTo(map);
+        _.omit(options, _.isUndefined);
 
-        this.markerLayer = L.mapbox.featureLayer().addTo(map);
+        this.map = L.mapbox.map(document.getElementById('map'), layer, options);
+        if(zoomControlPosition) new L.Control.Zoom({position: zoomControlPosition}).addTo(this.map);
+
+        this.markerLayer = L.mapbox.featureLayer().addTo(this.map);
         this.renderMarkers(this.props);
     }
 
     componentWillReceiveProps(props) {
+        const { center } = props;
+
+        if(this.center !== center){
+            this.center = center;
+            this.map.setView(this.center, 9);
+        }
+
         this.renderMarkers(props.markers);
     }
 
