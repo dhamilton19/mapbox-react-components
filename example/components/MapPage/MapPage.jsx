@@ -3,7 +3,7 @@ import config from '../../config';
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import { Map, Marker } from '../../../components';
+import { Map, Layer, Markers, Marker } from '../../../components';
 
 
 export default class MapPage extends Component {
@@ -24,9 +24,11 @@ export default class MapPage extends Component {
                     zoom={10}
                     minZoom={3}
                     zoomControl={false}
-                    zoomControlPosition={'bottomright'}
-                    markers={this.state.markers}
-                />
+                    zoomControlPosition={'bottomright'}>
+                    <Layer>
+                        <Markers markers={this.state.markers}/>
+                    </Layer>
+                </Map>
                 <button onClick={this.onClick} type="button" value="+" style={{position: "absolute", height: 100}}/>
             </div>
         );
@@ -34,9 +36,10 @@ export default class MapPage extends Component {
 
     onClick = () => {
         const coords = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
-        const markers = _.map(this.state.markers, _.clone);
+        let markers = _.map(this.state.markers, _.clone);
 
         markers.push(Marker({coords, title: 'test', description: 'test'}));
+
         this.setState({markers});
     }
 }

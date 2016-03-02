@@ -14,14 +14,12 @@ export default class Map extends Component {
         minZoom: PropTypes.number,
         maxZoom: PropTypes.number,
         zoomControl: PropTypes.bool,
-        zoomControlPosition: PropTypes.string,
-        markers: PropTypes.array
+        zoomControlPosition: PropTypes.string
     };
 
     static defaultProps = {
         layer: 'mapbox.streets',
-        zoomControl: true,
-        markers: []
+        zoomControl: true
     };
 
     componentWillMount() {
@@ -41,13 +39,10 @@ export default class Map extends Component {
 
         this.center = center;
 
-        _.omit(options, _.isUndefined);
+        options = _.omitBy(options, _.isUndefined);
 
-        this.map = L.mapbox.map(document.getElementById('map'), layer, options);
+        this.map = L.mapbox.map(ReactDOM.findDOMNode(this), layer, options);
         if(zoomControlPosition) new L.Control.Zoom({position: zoomControlPosition}).addTo(this.map);
-
-        this.markerLayer = L.mapbox.featureLayer().addTo(this.map);
-        this.renderMarkers(this.props);
     }
 
     componentWillReceiveProps(props) {
@@ -57,21 +52,20 @@ export default class Map extends Component {
             this.center = center;
             this.map.setView(this.center, 9);
         }
-
-        this.renderMarkers(props.markers);
     }
 
     render() {
-        return <div id='map'/>;
-    }
+        const { children } = this.props;
 
-    renderMarkers(markers) {
-        if(markers && markers.length > 0) {
-            this.markerLayer.setGeoJSON({
-                type: 'FeatureCollection',
-                features: markers
-            });
-        }
+        let childrenWithProps = React.Children.map(children, (child) => {
+            return React.cloneElement(child, { map: this.map });
+        });
+
+        return (
+            <div id="map">
+                {childrenWithProps}
+            </div>
+        );
     }
 
 };

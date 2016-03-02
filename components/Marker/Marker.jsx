@@ -1,5 +1,4 @@
 export default ({coords, title, description}) => {
-
     return {
         type: 'Feature',
         geometry: {
