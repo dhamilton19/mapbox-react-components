@@ -5,18 +5,15 @@ import L from 'mapbox.js';
 export default class Markers extends Component {
 
     static propTypes = {
+        layer: PropTypes.object,
         markers: PropTypes.array
     };
 
-    static defaultProps = {
-        markers: []
-    };
-
     componentWillReceiveProps(props) {
-        const { markerLayer, markers } = props;
+        const { layer, markers } = props;
 
-        if(markerLayer) {
-            this.renderMarkers(markerLayer, markers);
+        if(layer) {
+            this.renderMarkers(layer, markers);
         }
     }
 
@@ -28,11 +25,16 @@ export default class Markers extends Component {
         return null;
     }
 
-    renderMarkers(markerLayer, markers) {
+    renderMarkers(layer, markers) {
         if(markers && markers.length > 0) {
-            markerLayer.setGeoJSON({
+
+            const features = markers.map((marker) => {
+                return marker.getMarker();
+            });
+
+            layer.setGeoJSON({
                 type: 'FeatureCollection',
-                features: markers
+                features: features
             });
         }
     }
