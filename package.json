@@ -1,13 +1,12 @@
 {
   "name": "mapbox-react-components",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "React components for mapbox",
   "author": "David Hamilton",
   "scripts": {
     "start": "node ./server",
     "babel": "babel ./components --out-dir ./lib",
-    "sass": "cpx './components/**/*.scss' ./lib",
-    "build": "cross-env NODE_ENV=production npm run babel && npm run sass",
+    "build": "cross-env NODE_ENV=production npm run babel",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

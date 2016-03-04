@@ -1,30 +1,25 @@
-import _ from 'lodash';
+import Feature from '../Feature';
 
-export default class Line {
 
-    constructor(coordinates, stroke, width, opacity){
+export default class Line extends Feature {
+
+    constructor({coordinates, stroke, width, opacity}){
+        super();
         this.coordinates = coordinates;
         this.stroke = stroke;
         this.width = width;
         this.opacity = opacity;
     }
 
-    getLine() {
-        let properties = {
+    getType() {
+        return 'LineString';
+    }
+
+    getProperties() {
+        return {
             stroke: this.stroke,
             width: this.width,
             opacity: this.opacity
-        };
-
-        properties = _.omitBy(properties, _.isUndefined);
-
-        return {
-            type: 'Feature',
-            geometry: {
-                type: 'LineString',
-                coordinates: this.coordinates
-            },
-            properties
         };
     }
 

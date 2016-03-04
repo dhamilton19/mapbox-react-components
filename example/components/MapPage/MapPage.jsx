@@ -1,9 +1,10 @@
 import config from '../../config';
+import data from '../../data';
 
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import { Map, Layer, Markers } from '../../../components';
+import { Map, Layer, Markers, Lines, Line, Polygons, Polygon } from '../../../components';
 import MapMarker from '../MapMarker';
 
 
@@ -11,9 +12,11 @@ export default class MapPage extends Component {
 
     constructor() {
         super();
-        this.state = {
-            markers: []
-        };
+        this.state = {};
+    }
+
+    componentDidMount() {
+        this.render();
     }
 
     render() {
@@ -21,28 +24,83 @@ export default class MapPage extends Component {
             <div>
                 <Map
                     accessToken={config.accessToken}
-                    center={[40, -74.50]}
-                    zoom={10}
+                    center={[36, 70]}
+                    zoom={3}
                     minZoom={3}
                     zoomControl={false}
-                    zoomControlPosition={'bottomright'}>
+                    zoomControlPosition={'bottomright'}
+                    onMapLoad={this.handleMapLoad}>
+                    <Layer
+                        onFeatureClick={this.handleFeatureClick}
+                        onFeatureDblClick={this.handleFeatureDblClick}>
+                        <Markers list={this.state.markers}/>
+                    </Layer>
                     <Layer>
-                        <Markers markers={this.state.markers}/>
+                        <Lines list={this.state.lines}/>
+                    </Layer>
+                    <Layer>
+                        <Polygons list={this.state.polygons}/>
                     </Layer>
                 </Map>
-                <button onClick={this.onClick} type="button" style={{position: "absolute", height: 30, width: 100}}>+ Marker</button>
+                <button onClick={this.onButtonClick} type="button" style={{position: "absolute", height: 30, width: 100}}>+ Marker</button>
             </div>
         );
     }
 
-    onClick = () => {
-        const coords = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
+    handleMapLoad = () => {
+        this.setState({
+            markers: [],
+            lines: this.getLines(),
+            polygons: this.getPolygons()
+        });
+    };
+
+    onButtonClick = () => {
+        const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
         let markers = _.map(this.state.markers, _.clone);
 
-        const marker = new MapMarker(coords, "test", "description");
+        const marker = new MapMarker({
+            coordinates,
+            title: "test",
+            description: "description"
+        });
 
         markers.push(marker);
 
         this.setState({markers});
+    };
+
+    handleFeatureClick = (value) => {
+        console.log("Single click: ${value}", value);
+    };
+
+    handleFeatureDblClick = (value) => {
+        console.log("Double click: ${value}", value);
+    };
+
+    getLines() {
+        const properties = {
+            "stroke": "#ea0006",
+            "stroke-width": 3,
+            "stroke-opacity": 1
+        };
+
+        return data.lines.map((item) => {
+            return new Line({coordinates: item, ...properties});
+        });
+    }
+
+    getPolygons() {
+        const properties = {
+            "stroke": "#471d8d",
+            "stroke-width": 2.6,
+            "stroke-opacity": 12,
+            "fill": "#182e92",
+            "fill-opacity": 1
+        };
+
+        return data.polygons.map((item) => {
+            return new Polygon({coordinates: item, ...properties});
+        });
     }
 }

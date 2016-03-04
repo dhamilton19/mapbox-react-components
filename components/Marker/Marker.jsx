@@ -1,6 +1,10 @@
-export default class Marker {
+import Feature from '../Feature';
 
-    constructor(coordinates, title, description, color, size, symbol){
+
+export default class Marker extends Feature {
+
+    constructor({coordinates, title, description, color, size, symbol}){
+        super();
         this.coordinates = coordinates;
         this.title = title;
         this.description = description;
@@ -9,24 +13,17 @@ export default class Marker {
         this.symbol = symbol;
     }
 
-    getMarker() {
-        let properties = {
+    getType() {
+        return 'Point';
+    }
+
+    getProperties() {
+        return {
             title: this.title,
             description: this.description,
             'marker-color': this.color,
             'marker-size': this.size,
             'marker-symbol': this.symbol
-        };
-
-        properties = _.omitBy(properties, _.isUndefined);
-
-        return {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: this.coordinates
-            },
-            properties
         };
     }
 

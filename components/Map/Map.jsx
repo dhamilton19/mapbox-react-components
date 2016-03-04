@@ -14,7 +14,8 @@ export default class Map extends Component {
         minZoom: PropTypes.number,
         maxZoom: PropTypes.number,
         zoomControl: PropTypes.bool,
-        zoomControlPosition: PropTypes.string
+        zoomControlPosition: PropTypes.string,
+        onMapLoad: PropTypes.func
     };
 
     static defaultProps = {
@@ -27,7 +28,7 @@ export default class Map extends Component {
     }
 
     componentDidMount() {
-        const { layer, center, zoom, maxZoom, minZoom, zoomControl, zoomControlPosition } = this.props;
+        const { layer, center, zoom, maxZoom, minZoom, zoomControl, zoomControlPosition, onMapLoad } = this.props;
 
         let options = {
             center,
@@ -42,6 +43,11 @@ export default class Map extends Component {
         options = _.omitBy(options, _.isUndefined);
 
         this.map = L.mapbox.map(ReactDOM.findDOMNode(this), layer, options);
+
+        L.mapbox.tileLayer(layer).on('ready', () => {
+            if(onMapLoad) onMapLoad();
+        });
+
         if(zoomControlPosition) new L.Control.Zoom({position: zoomControlPosition}).addTo(this.map);
     }
 
@@ -56,9 +62,10 @@ export default class Map extends Component {
 
     render() {
         const { children } = this.props;
+        let childrenWithProps;
 
-        let childrenWithProps = React.Children.map(children, (child) => {
-            return React.cloneElement(child, { map: this.map });
+        childrenWithProps = React.Children.map(children, (child) => {
+            return React.cloneElement(child, {map: this.map});
         });
 
         return (
