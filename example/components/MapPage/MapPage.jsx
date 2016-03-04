@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import { Map, Layer, Markers, Lines, Line, Polygons, Polygon } from '../../../components';
-import MapMarker from '../MapMarker';
+import { Marker1, Marker2 } from '../Markers';
 
 
 export default class MapPage extends Component {
@@ -59,11 +59,24 @@ export default class MapPage extends Component {
         const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
         let markers = _.map(this.state.markers, _.clone);
 
-        const marker = new MapMarker({
-            coordinates,
-            title: "test",
-            description: "description"
-        });
+        const flag = Math.floor(Math.random() * 2) + 1;
+        let marker;
+
+        if(flag === 1){
+            marker = new Marker1({
+                coordinates,
+                title: "test",
+                description: "description"
+            });
+        }
+        else{
+            marker = new Marker2({
+                coordinates,
+                title: "test",
+                description: "description"
+            });
+
+        }
 
         markers.push(marker);
 
