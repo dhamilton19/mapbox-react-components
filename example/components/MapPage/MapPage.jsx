@@ -12,7 +12,11 @@ export default class MapPage extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            markers: [],
+            lines: this.getLines(),
+            polygons: this.getPolygons()
+        };
     }
 
     componentDidMount() {
@@ -28,8 +32,7 @@ export default class MapPage extends Component {
                     zoom={3}
                     minZoom={3}
                     zoomControl={false}
-                    zoomControlPosition={'bottomright'}
-                    onMapLoad={this.handleMapLoad}>
+                    zoomControlPosition={'bottomright'}>
                     <Layer
                         onFeatureClick={this.handleFeatureClick}
                         onFeatureDblClick={this.handleFeatureDblClick}>
@@ -46,14 +49,6 @@ export default class MapPage extends Component {
             </div>
         );
     }
-
-    handleMapLoad = () => {
-        this.setState({
-            markers: [],
-            lines: this.getLines(),
-            polygons: this.getPolygons()
-        });
-    };
 
     onButtonClick = () => {
         const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
