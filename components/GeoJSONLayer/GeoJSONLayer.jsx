@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import L from 'mapbox.js';
 
 
-export default class Layer extends Component {
+export default class GeoJSONLayer extends Component {
 
     static propTypes = {
+        children: PropTypes.any,
         map: PropTypes.object,
         onFeatureClick: PropTypes.func,
         onFeatureDblClick: PropTypes.func
@@ -28,7 +29,7 @@ export default class Layer extends Component {
         const { children } = this.props;
 
         let childrenWithProps = React.Children.map(children, (child) => {
-            return React.cloneElement(child, { layer: this });
+            return child ? React.cloneElement(child, { layer: this }) : null;
         });
 
         return <div>{childrenWithProps}</div>;

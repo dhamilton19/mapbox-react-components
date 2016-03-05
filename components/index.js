@@ -1,5 +1,5 @@
 import Map from './Map';
-import Layer from './Layer';
+import FeatureLayer from './FeatureLayer';
 import Markers from './Markers';
 import Polygons from './Polygons';
 import Lines from './Lines';
@@ -9,7 +9,7 @@ import Polygon from './Polygon';
 
 export {
     Map,
-    Layer,
+    FeatureLayer,
     Markers,
     Lines,
     Polygons,

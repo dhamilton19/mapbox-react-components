@@ -1,6 +1,6 @@
 {
   "name": "mapbox-react-components",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "React components for mapbox",
   "author": "David Hamilton",
   "scripts": {

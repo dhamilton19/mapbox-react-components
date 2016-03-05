@@ -3,6 +3,12 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Features extends Component {
 
+    static propTypes = {
+        layer: PropTypes.object,
+        item: PropTypes.object,
+        list: PropTypes.array
+    };
+
     componentWillReceiveProps(props) {
         const { layer, item, list } = props;
 

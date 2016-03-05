@@ -4,7 +4,8 @@ import data from '../../data';
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import { Map, Layer, Markers, Lines, Line, Polygons, Polygon } from '../../../components';
+import { Map, FeatureLayer, Markers, Lines, Line, Polygons, Polygon } from '../../../components';
+import { ZoomControl } from '../../../components/Controls';
 import { Marker1, Marker2 } from '../Markers';
 
 
@@ -31,19 +32,19 @@ export default class MapPage extends Component {
                     center={[36, 70]}
                     zoom={3}
                     minZoom={3}
-                    zoomControl={false}
-                    zoomControlPosition={'bottomright'}>
-                    <Layer
+                    zoomControl={false}>
+                    <ZoomControl position={'bottomright'}/>
+                    <FeatureLayer
                         onFeatureClick={this.handleFeatureClick}
                         onFeatureDblClick={this.handleFeatureDblClick}>
                         <Markers list={this.state.markers}/>
-                    </Layer>
-                    <Layer>
+                    </FeatureLayer>
+                    <FeatureLayer>
                         <Lines list={this.state.lines}/>
-                    </Layer>
-                    <Layer>
+                    </FeatureLayer>
+                    <FeatureLayer>
                         <Polygons list={this.state.polygons}/>
-                    </Layer>
+                    </FeatureLayer>
                 </Map>
                 <button onClick={this.onButtonClick} type="button" style={{position: "absolute", height: 30, width: 100}}>+ Marker</button>
             </div>
