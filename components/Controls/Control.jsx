@@ -12,8 +12,14 @@ export default class Control extends Component {
         return null;
     }
 
+    getType() {
+        throw new TypeError("Function must be overridden.");
+    }
+
     addControl(options, map) {
-        if(map) new L.Control[this.getType()](options).addTo(map);
+        if(map && !this.control) {
+            this.control = new L.Control[this.getType()](options).addTo(map);
+        }
     }
 
 };
