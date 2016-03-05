@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import L from 'mapbox.js';
 import Layer from '../Layer';
 
 
@@ -12,7 +13,7 @@ export default class FeatureLayer extends Layer {
     };
 
     getType() {
-        return 'featureLayer';
+        return L.mapbox.featureLayer();
     }
 
     setListeners() {
@@ -31,7 +32,7 @@ export default class FeatureLayer extends Layer {
         }
     }
 
-    setFeatures(features) {
+    updateLayer(features) {
         this.getLayer().setGeoJSON({
             type: 'FeatureCollection',
             features

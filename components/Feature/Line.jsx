@@ -1,4 +1,4 @@
-import Feature from '../Feature';
+import Feature from './Feature';
 
 
 export default class Line extends Feature {

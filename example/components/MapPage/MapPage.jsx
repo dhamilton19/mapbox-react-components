@@ -2,10 +2,10 @@ import config from '../../config';
 import data from '../../data';
 
 import React, { Component } from 'react';
-import _ from 'lodash';
+import map from 'lodash/map';
+import clone from 'lodash/clone';
 
-import { Map, FeatureLayer, Markers, Lines, Line, Polygons, Polygon } from '../../../components';
-import { ZoomControl } from '../../../components/Controls';
+import { Map, Control, FeatureLayer, GeoJsonLayer, Markers, Lines, Polygons, Feature, LeafletFeature } from '../../../components';
 import { Marker1, Marker2 } from '../Markers';
 
 
@@ -33,7 +33,7 @@ export default class MapPage extends Component {
                     zoom={3}
                     minZoom={3}
                     zoomControl={false}>
-                    <ZoomControl position={'bottomright'}/>
+                    <Control.ZoomControl position={'bottomright'}/>
                     <FeatureLayer
                         onFeatureClick={this.handleFeatureClick}
                         onFeatureDblClick={this.handleFeatureDblClick}>
@@ -45,6 +45,11 @@ export default class MapPage extends Component {
                     <FeatureLayer>
                         <Polygons list={this.state.polygons}/>
                     </FeatureLayer>
+                    <GeoJsonLayer>
+                        <LeafletFeature.Markers
+                            markers={this.getMarkers()}
+                            icon={{icon: 'coffee', markerColor: 'red'}}/>
+                    </GeoJsonLayer>
                 </Map>
                 <button onClick={this.onButtonClick} type="button" style={{position: "absolute", height: 30, width: 100}}>+ Marker</button>
             </div>
@@ -53,7 +58,7 @@ export default class MapPage extends Component {
 
     onButtonClick = () => {
         const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
-        let markers = _.map(this.state.markers, _.clone);
+        let markers = map(this.state.markers, clone);
 
         const flag = Math.floor(Math.random() * 2) + 1;
         let marker;
@@ -95,7 +100,7 @@ export default class MapPage extends Component {
         };
 
         return data.lines.map((item) => {
-            return new Line({coordinates: item, ...properties});
+            return new Feature.Line({coordinates: item, ...properties});
         });
     }
 
@@ -109,7 +114,16 @@ export default class MapPage extends Component {
         };
 
         return data.polygons.map((item) => {
-            return new Polygon({coordinates: item, ...properties});
+            return new Feature.Polygon({coordinates: item, ...properties});
         });
+    }
+
+    getMarkers() {
+        let markers = [];
+        for(let i=0;i<10;i++){
+            const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
+            markers.push(new Feature.Marker({coordinates}));
+        }
+        return markers;
     }
 }

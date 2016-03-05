@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'lodash';
+import omit from 'lodash/omit';
+import omitBy from 'lodash/omitBy';
+import isUndefined from 'lodash/isUndefined';
+import difference from 'lodash/difference';
 import L from 'mapbox.js';
 
 
@@ -31,7 +34,7 @@ export default class Map extends Component {
 
         this.center = center;
 
-        const options = _.omit(_.omitBy(this.props, _.isUndefined), ["accessToken", "layer", "children"]);
+        const options = omit(omitBy(this.props, isUndefined), ["accessToken", "layer", "children"]);
 
         this.map = L.mapbox.map(ReactDOM.findDOMNode(this), layer, options);
 
@@ -41,7 +44,7 @@ export default class Map extends Component {
     componentWillReceiveProps(props) {
         const { center } = props;
 
-        if(_.difference(this.center, center).length > 0){
+        if(difference(this.center, center).length > 0){
             this.center = center;
             this.map.setView(this.center, 9);
         }

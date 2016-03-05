@@ -1,19 +1,21 @@
 import Map from './Map';
+import * as Control from './Controls';
 import FeatureLayer from './FeatureLayer';
+import GeoJsonLayer from './GeoJsonLayer';
 import Markers from './Markers';
 import Polygons from './Polygons';
 import Lines from './Lines';
-import Marker from './Marker';
-import Line from './Line';
-import Polygon from './Polygon';
+import * as Feature from './Feature';
+import * as LeafletFeature from './LeafletFeature';
 
 export {
     Map,
+    Control,
     FeatureLayer,
+    GeoJsonLayer,
     Markers,
     Lines,
     Polygons,
-    Marker,
-    Line,
-    Polygon
+    Feature,
+    LeafletFeature
 }

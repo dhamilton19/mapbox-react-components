@@ -10,10 +10,9 @@ export default class Features extends Component {
     };
 
     componentWillReceiveProps(props) {
-        const { layer, item, list } = props;
+        const { layer, list } = props;
 
         if(layer) {
-            this.renderFeature(layer, item);
             this.renderFeatures(layer, list);
         }
     }
@@ -26,14 +25,10 @@ export default class Features extends Component {
         return null;
     }
 
-    renderFeature(layer, feature) {
-        if(feature) layer.setFeatures(feature.getGeoJSON());
-    }
-
     renderFeatures(layer, features) {
         if(features && features.length > 0) {
             layer.setFeatures(features.map((feature) => {
-                return feature.getGeoJSON();
+                return feature.toGeoJSON();
             }));
         }
     }

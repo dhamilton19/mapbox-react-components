@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import omitBy from 'lodash/omitBy';
+import isUndefined from 'lodash/isUndefined';
 
 
 export default class Feature {
@@ -11,8 +12,8 @@ export default class Feature {
         throw new TypeError("Function must be overridden.");
     }
 
-    getGeoJSON() {
-        const properties =  _.omitBy(this.getProperties(), _.isUndefined);
+    toGeoJSON() {
+        const properties =  omitBy(this.getProperties(), isUndefined);
 
         return {
             type: 'Feature',

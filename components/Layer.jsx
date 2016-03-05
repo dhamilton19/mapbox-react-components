@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import isArray from 'lodash/isArray';
 import L from 'mapbox.js';
 
 
 export default class Layer extends Component {
 
+    componentDidMount() {
+        this.forceUpdate();
+    }
+
     componentWillReceiveProps(props) {
         const { map } = props;
 
         if(!this.layer && map) {
-            this.layer = L.mapbox[this.getType()]().addTo(map);
+            this.layer = this.getType().addTo(map);
 
             this.setListeners();
         }
-    }
-
-    componentDidMount() {
-        this.forceUpdate();
     }
 
     render() {
@@ -38,6 +39,13 @@ export default class Layer extends Component {
 
     setListeners() {}
 
-    setFeatures(features) {}
+    setFeatures(features, options) {
+        features = isArray(features) ? features : [features];
+        this.updateLayer(features, options);
+    }
+
+    updateLayer(features, options) {
+        throw new TypeError("Function must be overridden.");
+    }
 
 };
