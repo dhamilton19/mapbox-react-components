@@ -36,15 +36,15 @@ export default class GeoJsonLayer extends Layer {
     }
 
     haveFeaturesChanged(newFeatures) {
-        const one = newFeatures.map((feature) => {
+        const first = newFeatures.map((feature) => {
             return feature.geometry.coordinates;
         });
 
-        const two = this.features.map((feature) => {
+        const second = this.features.map((feature) => {
             return feature.geometry.coordinates;
         });
 
-        return deepDifference(one, two).length > 0;
+        return deepDifference(first, second).length > 0;
     }
 
 
