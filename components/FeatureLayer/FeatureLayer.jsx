@@ -12,10 +12,6 @@ export default class FeatureLayer extends Layer {
         onFeatureDblClick: PropTypes.func
     };
 
-    getType() {
-        return L.mapbox.featureLayer();
-    }
-
     setListeners() {
         const { onFeatureClick, onFeatureDblClick } = this.props;
 
@@ -33,6 +29,13 @@ export default class FeatureLayer extends Layer {
     }
 
     updateLayer(features) {
+        if(!this.getLayer()){
+            const { map } = this.props;
+            const layer = L.mapbox.featureLayer().addTo(map);
+            this.setLayer(layer);
+            this.setListeners();
+        }
+
         this.getLayer().setGeoJSON({
             type: 'FeatureCollection',
             features

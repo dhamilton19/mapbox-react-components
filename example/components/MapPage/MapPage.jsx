@@ -48,7 +48,7 @@ export default class MapPage extends Component {
                     <GeoJsonLayer>
                         <LeafletFeature.Markers
                             markers={this.getMarkers()}
-                            icon={{icon: 'coffee', markerColor: 'red'}}/>
+                            icon={{icon: 'done', markerColor: 'red'}}/>
                     </GeoJsonLayer>
                 </Map>
                 <button onClick={this.onButtonClick} type="button" style={{position: "absolute", height: 30, width: 100}}>+ Marker</button>
@@ -122,8 +122,9 @@ export default class MapPage extends Component {
         let markers = [];
         for(let i=0;i<10;i++){
             const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
-            markers.push(new Feature.Marker({coordinates}));
+            markers.push(new LeafletFeature.Marker({coordinates, popup: {content: "heiiilo"}}));
         }
+        markers.push(new LeafletFeature.Marker({coordinates: [75, 37]}));
         return markers;
     }
 }

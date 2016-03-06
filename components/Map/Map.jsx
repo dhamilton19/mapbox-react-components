@@ -6,6 +6,8 @@ import isUndefined from 'lodash/isUndefined';
 import difference from 'lodash/difference';
 import L from 'mapbox.js';
 
+require('mapbox.js/theme/style.css');
+
 
 export default class Map extends Component {
 

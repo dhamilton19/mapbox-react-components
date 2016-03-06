@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import L from 'mapbox.js';
-require('./AwesomeMarkers/leaflet.awesome-markers.min.js');
+require('./AwesomeMarkers/leaflet.awesome-markers.js');
 require('./AwesomeMarkers/leaflet.awesome-markers.css');
+require('./style.css');
 
 import { Marker } from '../Feature';
 
@@ -23,14 +24,14 @@ export default class Markers extends Component {
         if(layer){
             const options = {
                 title: 'test',
-                icon: L.AwesomeMarkers.icon(icon)
+                icon: L.AwesomeMarkers.icon({...icon})
             };
 
-            const mappedFeatures = markers.map((marker) => {
+            const features = markers.map((marker) => {
                 return marker.toGeoJSON();
             });
 
-            layer.setFeatures(mappedFeatures, options);
+            layer.setFeatures(features, options);
         }
     }
 

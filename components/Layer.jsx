@@ -9,16 +9,6 @@ export default class Layer extends Component {
         this.forceUpdate();
     }
 
-    componentWillReceiveProps(props) {
-        const { map } = props;
-
-        if(!this.layer && map) {
-            this.layer = this.getType().addTo(map);
-
-            this.setListeners();
-        }
-    }
-
     render() {
         const { children } = this.props;
 
@@ -29,12 +19,12 @@ export default class Layer extends Component {
         return <div>{childrenWithProps}</div>;
     }
 
-    getType() {
-        throw new TypeError("Function must be overridden.");
-    }
-
     getLayer() {
         return this.layer;
+    }
+
+    setLayer(layer) {
+        this.layer = layer;
     }
 
     setListeners() {}
