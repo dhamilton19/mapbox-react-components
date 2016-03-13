@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import L from 'mapbox.js';
 
-import GeoJsonLayer from '../GeoJsonLayer';
+import GeoJsonLayer from './GeoJsonLayer';
 
 
 export default class LGeoJsonLayer extends GeoJsonLayer {

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import L from 'mapbox.js';
 
-import deepDifference from '../utils/deepDifference';
-import Layer from './Layer';
+import deepDifference from '../../utils/deepDifference';
+import Layer from '../Layer';
 
 
 export default class GeoJsonLayer extends Layer {

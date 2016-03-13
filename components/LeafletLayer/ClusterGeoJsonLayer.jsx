@@ -3,7 +3,7 @@ require('./MarkerCluster');
 import React, { PropTypes } from 'react';
 import L from 'mapbox.js';
 
-import GeoJsonLayer from '../GeoJsonLayer';
+import GeoJsonLayer from './GeoJsonLayer';
 import { Marker } from '../LeafletFeature';
 
 

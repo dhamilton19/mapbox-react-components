@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import map from 'lodash/map';
 import clone from 'lodash/clone';
 
-import { Map, Control, FeatureLayer, LGeoJsonLayer, ClusterGeoJsonLayer, Markers, Lines, Polygons, Feature, LeafletFeature } from '../../../components';
+import { Map, Control, FeatureLayer, LeafletLayer, Features, Feature, LeafletFeature } from '../../../components';
 import { Marker1, Marker2 } from '../Markers';
 
 
@@ -35,27 +35,27 @@ export default class MapPage extends Component {
                     zoomControl={false}>
                     <Control.Zoom position={'bottomright'}/>
                     {/* <Control.Weather apiKey={config.openWeatherApiKey}/> */}
-                    {/*<FeatureLayer
+                    <FeatureLayer
                         onFeatureClick={this.handleFeatureClick}
                         onFeatureDblClick={this.handleFeatureDblClick}>
-                        <Markers list={this.state.markers}/>
+                        <Features.Markers list={this.state.markers}/>
                     </FeatureLayer>
                     <FeatureLayer>
-                        <Lines list={this.state.lines}/>
+                        <Features.Lines list={this.state.lines}/>
                     </FeatureLayer>
                     <FeatureLayer>
-                        <Polygons list={this.state.polygons}/>
+                        <Features.Polygons list={this.state.polygons}/>
                     </FeatureLayer>
-                    <LGeoJsonLayer>
+                    <LeafletLayer.LGeoJsonLayer>
                         <LeafletFeature.Markers
                             markers={this.getMarkers()}
                             icon={{icon: 'done', markerColor: 'red'}}/>
-                    </LGeoJsonLayer>*/}
-                    <ClusterGeoJsonLayer>
+                    </LeafletLayer.LGeoJsonLayer>
+                    <LeafletLayer.ClusterGeoJsonLayer>
                         <LeafletFeature.Markers
                             markers={this.getMarkers()}
                             icon={{icon: 'done', markerColor: 'red'}}/>
-                    </ClusterGeoJsonLayer>
+                    </LeafletLayer.ClusterGeoJsonLayer>
                 </Map>
                 <button onClick={this.onButtonClick} type="button" style={{position: "absolute", height: 30, width: 100}}>+ Marker</button>
             </div>

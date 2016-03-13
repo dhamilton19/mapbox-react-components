@@ -1,6 +1,4 @@
-export default (first, second) => {
-        return [...difference(first, second), ...difference(second, first)];
-}
+export default (first, second) => [...difference(first, second), ...difference(second, first)];
 
 const difference = (first, second) => {
     let difference = [];
