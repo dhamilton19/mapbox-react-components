@@ -2,7 +2,7 @@ import Control from './Control';
 import React, { PropTypes } from 'react';
 
 
-export default class ZoomControl extends Control {
+export default class Zoom extends Control {
 
     static propTypes = {
         map: PropTypes.object,

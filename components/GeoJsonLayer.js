@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import L from 'mapbox.js';
 
-import deepDifference from '../../utils/deepDifference';
-import Layer from '../Layer';
+import deepDifference from '../utils/deepDifference';
+import Layer from './Layer';
 
 
 export default class GeoJsonLayer extends Layer {
@@ -17,21 +17,9 @@ export default class GeoJsonLayer extends Layer {
             const { map } = this.props;
             this.features = features;
 
-            if (this.getLayer()) this.getLayer().clearLayers();
+            if (this.layer) this.layer.clearLayers();
 
-            const layer = L.geoJson(this.features, {
-                pointToLayer: (feature, latlng) => {
-                    let marker = L.marker(latlng, options);
-                    if(feature.properties.popup) {
-                        const popup = L.popup()
-                            .setContent(feature.properties.popup.content);
-                        marker.bindPopup(popup);
-                    }
-                    return marker;
-                }
-            }).addTo(map);
-
-            this.setLayer(layer);
+            this.layer = this.createLayer(map, options);
         }
     }
 
@@ -45,6 +33,24 @@ export default class GeoJsonLayer extends Layer {
         });
 
         return deepDifference(first, second).length > 0;
+    }
+
+    createLayer(map, options) {
+        throw new Error('Must override this function');
+    }
+
+    getLayer(options) {
+        return L.geoJson(this.features, {
+            pointToLayer: (feature, latlng) => {
+                let marker = L.marker(latlng, options);
+                if(feature.properties.popup) {
+                    const popup = L.popup()
+                        .setContent(feature.properties.popup.content);
+                    marker.bindPopup(popup);
+                }
+                return marker;
+            }
+        })
     }
 
 

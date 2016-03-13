@@ -1,10 +1,8 @@
+require('./AwesomeMarkers');
+
 import React, { PropTypes, Component } from 'react';
 import L from 'mapbox.js';
-require('./AwesomeMarkers/leaflet.awesome-markers.js');
-require('./AwesomeMarkers/leaflet.awesome-markers.css');
-require('./style.css');
 
-import { Marker } from '../Feature';
 
 export default class Markers extends Component {
 

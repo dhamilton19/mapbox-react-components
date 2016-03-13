@@ -1,0 +1,10 @@
+#map {
+    background-color: #beb3b1;
+    background-image: linear-gradient(rgba(219, 219, 219, 0.5) 1px, transparent 1px),
+    linear-gradient(#dbdbdb 1px, transparent 1px),
+    linear-gradient(90deg, rgba(219, 219, 219, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(219, 219, 219, 0.7) 1px, transparent 1px),
+    linear-gradient(transparent 3px, #beb3b1 3px, #beb3b1 58px, transparent 58px),
+    linear-gradient(90deg, rgba(219, 219, 219, 0.7) 3px, transparent 3px, transparent 58px, rgba(219, 219, 219, 0.7) 58px);
+    background-size: 15px 15px, 60px 60px, 15px 15px, 60px 60px, 60px 60px, 60px 60px;
+}

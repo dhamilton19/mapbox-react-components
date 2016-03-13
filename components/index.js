@@ -1,7 +1,8 @@
 import Map from './Map';
 import * as Control from './Controls';
 import FeatureLayer from './FeatureLayer';
-import GeoJsonLayer from './GeoJsonLayer';
+import LGeoJsonLayer from './LGeoJsonLayer';
+import ClusterGeoJsonLayer from './ClusterGeoJsonLayer';
 import Markers from './Markers';
 import Polygons from './Polygons';
 import Lines from './Lines';
@@ -12,7 +13,8 @@ export {
     Map,
     Control,
     FeatureLayer,
-    GeoJsonLayer,
+    LGeoJsonLayer,
+    ClusterGeoJsonLayer,
     Markers,
     Lines,
     Polygons,

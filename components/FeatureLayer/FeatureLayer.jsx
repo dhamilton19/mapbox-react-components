@@ -16,27 +16,26 @@ export default class FeatureLayer extends Layer {
         const { onFeatureClick, onFeatureDblClick } = this.props;
 
         if(onFeatureClick){
-            this.getLayer().on("click", (e) => {
+            this.layer.on("click", (e) => {
                 onFeatureClick(e.layer.feature);
             });
         }
 
         if(onFeatureDblClick){
-            this.getLayer().on("dblclick", (e) => {
+            this.layer.on("dblclick", (e) => {
                 onFeatureDblClick(e.layer.feature);
             });
         }
     }
 
     updateLayer(features) {
-        if(!this.getLayer()){
+        if(!this.layer){
             const { map } = this.props;
-            const layer = L.mapbox.featureLayer().addTo(map);
-            this.setLayer(layer);
+            this.layer = L.mapbox.featureLayer().addTo(map);
             this.setListeners();
         }
 
-        this.getLayer().setGeoJSON({
+        this.layer.setGeoJSON({
             type: 'FeatureCollection',
             features
         });

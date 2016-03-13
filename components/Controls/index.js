@@ -1,7 +1,7 @@
 import Control from './Control';
-import ZoomControl from './ZoomControl';
+import Zoom from './Zoom';
 
 export {
     Control,
-    ZoomControl
+    Zoom
 }

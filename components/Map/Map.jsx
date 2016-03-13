@@ -1,3 +1,6 @@
+require('mapbox.js/theme/style.css');
+require('./styles.css');
+
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import omit from 'lodash/omit';
@@ -5,8 +8,6 @@ import omitBy from 'lodash/omitBy';
 import isUndefined from 'lodash/isUndefined';
 import difference from 'lodash/difference';
 import L from 'mapbox.js';
-
-require('mapbox.js/theme/style.css');
 
 
 export default class Map extends Component {

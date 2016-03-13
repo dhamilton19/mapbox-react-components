@@ -19,14 +19,6 @@ export default class Layer extends Component {
         return <div>{childrenWithProps}</div>;
     }
 
-    getLayer() {
-        return this.layer;
-    }
-
-    setLayer(layer) {
-        this.layer = layer;
-    }
-
     setListeners() {}
 
     setFeatures(features, options) {

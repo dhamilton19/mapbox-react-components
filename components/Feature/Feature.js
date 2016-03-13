@@ -1,8 +1,13 @@
 import omitBy from 'lodash/omitBy';
 import isUndefined from 'lodash/isUndefined';
+import assert from '../../utils/assert';
 
 
 export default class Feature {
+
+    constructor(coordinates) {
+        assert(coordinates).isNotEmpty('Missing Coordinates');
+    }
 
     getType() {
         throw new TypeError("Function must be overridden.");

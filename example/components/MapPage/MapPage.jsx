@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import map from 'lodash/map';
 import clone from 'lodash/clone';
 
-import { Map, Control, FeatureLayer, GeoJsonLayer, Markers, Lines, Polygons, Feature, LeafletFeature } from '../../../components';
+import { Map, Control, FeatureLayer, LGeoJsonLayer, ClusterGeoJsonLayer, Markers, Lines, Polygons, Feature, LeafletFeature } from '../../../components';
 import { Marker1, Marker2 } from '../Markers';
 
 
@@ -33,8 +33,8 @@ export default class MapPage extends Component {
                     zoom={3}
                     minZoom={3}
                     zoomControl={false}>
-                    <Control.ZoomControl position={'bottomright'}/>
-                    <FeatureLayer
+                    <Control.Zoom position={'bottomright'}/>
+                    {/*<FeatureLayer
                         onFeatureClick={this.handleFeatureClick}
                         onFeatureDblClick={this.handleFeatureDblClick}>
                         <Markers list={this.state.markers}/>
@@ -45,11 +45,16 @@ export default class MapPage extends Component {
                     <FeatureLayer>
                         <Polygons list={this.state.polygons}/>
                     </FeatureLayer>
-                    <GeoJsonLayer>
+                    <LGeoJsonLayer>
                         <LeafletFeature.Markers
                             markers={this.getMarkers()}
                             icon={{icon: 'done', markerColor: 'red'}}/>
-                    </GeoJsonLayer>
+                    </LGeoJsonLayer>*/}
+                    <ClusterGeoJsonLayer>
+                        <LeafletFeature.Markers
+                            markers={this.getMarkers()}
+                            icon={{icon: 'done', markerColor: 'red'}}/>
+                    </ClusterGeoJsonLayer>
                 </Map>
                 <button onClick={this.onButtonClick} type="button" style={{position: "absolute", height: 30, width: 100}}>+ Marker</button>
             </div>

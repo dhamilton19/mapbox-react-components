@@ -4,7 +4,7 @@ import Feature from './Feature';
 export default class Polygon extends Feature {
 
     constructor({coordinates, stroke, strokeWidth, strokeOpacity, fill, fillOpacity}){
-        super();
+        super(coordinates);
         this.coordinates = coordinates;
         this.stroke = stroke;
         this.strokeWidth = strokeWidth;
