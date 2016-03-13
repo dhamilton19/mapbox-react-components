@@ -12,7 +12,7 @@ export default class Zoom extends Control {
     componentWillReceiveProps(props) {
         const { position, map } = props;
 
-        if(position) this.addControl({position: position}, map);
+        if(position) this.addControl({position}, map);
     }
 
     getType() {

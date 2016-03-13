@@ -28,12 +28,13 @@ export default class MapPage extends Component {
         return (
             <div>
                 <Map
-                    accessToken={config.accessToken}
+                    accessToken={config.mapboxAccessToken}
                     center={[36, 70]}
                     zoom={3}
                     minZoom={3}
                     zoomControl={false}>
                     <Control.Zoom position={'bottomright'}/>
+                    {/* <Control.Weather apiKey={config.openWeatherApiKey}/> */}
                     {/*<FeatureLayer
                         onFeatureClick={this.handleFeatureClick}
                         onFeatureDblClick={this.handleFeatureDblClick}>

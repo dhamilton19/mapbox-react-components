@@ -20,7 +20,7 @@ export default class ClusterGeoJsonLayer extends GeoJsonLayer {
         chunkedLoading: PropTypes.bool
     };
 
-    defaultProps = {
+    static defaultProps = {
         spiderfyOnMaxZoom: true,
         showCoverageOnHover: true,
         zoomToBoundsOnClick: true,
@@ -35,12 +35,12 @@ export default class ClusterGeoJsonLayer extends GeoJsonLayer {
         const geoJsonLayer = this.getLayer(options);
 
         var markers = L.markerClusterGroup({
-                chunkedLoading,
                 spiderfyOnMaxZoom,
                 showCoverageOnHover,
                 zoomToBoundsOnClick,
                 singleMarkerMode,
-                animateAddingMarkers
+                animateAddingMarkers,
+                chunkedLoading
         });
 
         markers.addLayer(geoJsonLayer);
