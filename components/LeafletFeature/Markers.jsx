@@ -1,39 +1,39 @@
 require('./AwesomeMarkers');
 
-import React, { PropTypes, Component } from 'react';
+import { PropTypes, Component } from 'react';
 import L from 'mapbox.js';
 
 
 export default class Markers extends Component {
 
-    static propTypes = {
-        layer: PropTypes.object,
-        markers: PropTypes.array.isRequired,
-        icon: PropTypes.object.isRequired
-    };
+	static propTypes = {
+		icon: PropTypes.object.isRequired,
+		layer: PropTypes.object,
+		markers: PropTypes.array.isRequired
+	};
 
-    shouldComponentUpdate() {
-        return false;
-    }
+	componentWillReceiveProps(props) {
+		const { layer, markers, icon } = props;
 
-    componentWillReceiveProps(props) {
-        const { layer, markers, icon } = props;
+		if (layer) {
+			const options = {
+				title: 'test',
+				icon: L.AwesomeMarkers.icon({...icon})
+			};
 
-        if(layer){
-            const options = {
-                title: 'test',
-                icon: L.AwesomeMarkers.icon({...icon})
-            };
+			const features = markers.map((marker) => {
+				return marker.toGeoJSON();
+			});
 
-            const features = markers.map((marker) => {
-                return marker.toGeoJSON();
-            });
+			layer.setFeatures(features, options);
+		}
+	}
 
-            layer.setFeatures(features, options);
-        }
-    }
+	shouldComponentUpdate() {
+		return false;
+	}
 
-    render() {
-        return null;
-    }
-};
+	render() {
+		return null;
+	}
+}

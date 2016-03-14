@@ -1,7 +1,7 @@
 L.MarkerCluster = L.Marker.extend({
 	initialize: function (group, zoom, a, b) {
 
-		L.Marker.prototype.initialize.call(this, a ? (a._cLatLng || a.getLatLng()) : new L.LatLng(0, 0), { icon: this });
+		L.Marker.prototype.initialize.call(this, a ? (a._cLatLng || a.getLatLng()) : new L.LatLng(0, 0), {icon: this});
 
 
 		this._group = group;
@@ -155,11 +155,11 @@ L.MarkerCluster = L.Marker.extend({
 
 	_recalculateBounds: function () {
 		var markers = this._markers,
-		    childClusters = this._childClusters,
-		    latSum = 0,
-		    lngSum = 0,
-		    totalCount = this._childCount,
-		    i, child, childLatLng, childCount;
+			childClusters = this._childClusters,
+			latSum = 0,
+			lngSum = 0,
+			totalCount = this._childCount,
+			i, child, childLatLng, childCount;
 
 		// Case where all markers are removed from the map and we are left with just an empty _topClusterLevel.
 		if (totalCount === 0) {
@@ -367,8 +367,8 @@ L.MarkerCluster = L.Marker.extend({
 	// runAtBottomLevel: function that takes an L.MarkerCluster as an argument that should be applied at only the bottom level
 	_recursively: function (boundsToApplyTo, zoomLevelToStart, zoomLevelToStop, runAtEveryLevel, runAtBottomLevel) {
 		var childClusters = this._childClusters,
-		    zoom = this._zoom,
-		    i, c;
+			zoom = this._zoom,
+			i, c;
 
 		if (zoomLevelToStart > zoom) { //Still going down to required depth, just recurse to child clusters
 			for (i = childClusters.length - 1; i >= 0; i--) {

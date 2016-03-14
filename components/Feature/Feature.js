@@ -5,29 +5,29 @@ import assert from '../../utils/assert';
 
 export default class Feature {
 
-    constructor(coordinates) {
-        assert(coordinates).isNotEmpty('Missing Coordinates');
-    }
+	constructor(coordinates) {
+		assert(coordinates).isNotEmpty('Missing Coordinates');
+	}
 
-    getType() {
-        throw new TypeError("Function must be overridden.");
-    }
+	getType() {
+		throw new TypeError('Function must be overridden.');
+	}
 
-    getProperties() {
-        throw new TypeError("Function must be overridden.");
-    }
+	getProperties() {
+		throw new TypeError('Function must be overridden.');
+	}
 
-    toGeoJSON() {
-        const properties =  omitBy(this.getProperties(), isUndefined);
+	toGeoJSON() {
+		const properties = omitBy(this.getProperties(), isUndefined);
 
-        return {
-            type: 'Feature',
-            geometry: {
-                type: this.getType(),
-                coordinates: this.coordinates
-            },
-            properties
-        };
-    }
+		return {
+			type: 'Feature',
+			geometry: {
+				type: this.getType(),
+				coordinates: this.coordinates
+			},
+			properties
+		};
+	}
 
-};
+}

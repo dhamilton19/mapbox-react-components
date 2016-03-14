@@ -1,53 +1,51 @@
 require('./MarkerCluster');
 
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 import L from 'mapbox.js';
 
 import GeoJsonLayer from './GeoJsonLayer';
-import { Marker } from '../LeafletFeature';
 
 
 export default class ClusterGeoJsonLayer extends GeoJsonLayer {
 
-    static propTypes = {
-        children: PropTypes.any,
-        map: PropTypes.object,
-        spiderfyOnMaxZoom: PropTypes.bool,
-        showCoverageOnHover: PropTypes.bool,
-        zoomToBoundsOnClick: PropTypes.bool,
-        singleMarkerMode: PropTypes.bool,
-        animateAddingMarkers: PropTypes.bool,
-        chunkedLoading: PropTypes.bool
-    };
+	static propTypes = {
+		animateAddingMarkers: PropTypes.bool,
+		chunkedLoading: PropTypes.bool,
+		map: PropTypes.object,
+		showCoverageOnHover: PropTypes.bool,
+		singleMarkerMode: PropTypes.bool,
+		spiderfyOnMaxZoom: PropTypes.bool,
+		zoomToBoundsOnClick: PropTypes.bool
+	};
 
-    static defaultProps = {
-        spiderfyOnMaxZoom: true,
-        showCoverageOnHover: true,
-        zoomToBoundsOnClick: true,
-        singleMarkerMode: false,
-        animateAddingMarkers: true,
-        chunkedLoading: true
-    };
+	static defaultProps = {
+		animateAddingMarkers: true,
+		chunkedLoading: true,
+		showCoverageOnHover: true,
+		singleMarkerMode: false,
+		spiderfyOnMaxZoom: true,
+		zoomToBoundsOnClick: true
+	};
 
-    createLayer(map, options) {
-        const { spiderfyOnMaxZoom, showCoverageOnHover, zoomToBoundsOnClick, singleMarkerMode, animateAddingMarkers, chunkedLoading } = this.props;
+	createLayer(map, options) {
+		const { spiderfyOnMaxZoom, showCoverageOnHover, zoomToBoundsOnClick, singleMarkerMode, animateAddingMarkers, chunkedLoading } = this.props;
 
-        const geoJsonLayer = this.getLayer(options);
+		const geoJsonLayer = this.getLayer(options);
 
-        var markers = L.markerClusterGroup({
-                spiderfyOnMaxZoom,
-                showCoverageOnHover,
-                zoomToBoundsOnClick,
-                singleMarkerMode,
-                animateAddingMarkers,
-                chunkedLoading
-        });
+		const markers = L.markerClusterGroup({
+			spiderfyOnMaxZoom,
+			showCoverageOnHover,
+			zoomToBoundsOnClick,
+			singleMarkerMode,
+			animateAddingMarkers,
+			chunkedLoading
+		});
 
-        markers.addLayer(geoJsonLayer);
+		markers.addLayer(geoJsonLayer);
 
-        map.addLayer(markers);
+		map.addLayer(markers);
 
-        return markers;
-    }
+		return markers;
+	}
 
-};
+}

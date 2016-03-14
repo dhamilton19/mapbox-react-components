@@ -1,33 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import isArray from 'lodash/isArray';
-import L from 'mapbox.js';
 
 
 export default class Layer extends Component {
 
-    componentDidMount() {
-        this.forceUpdate();
-    }
+	static propTypes = {
+		children: PropTypes.array
+	};
 
-    render() {
-        const { children } = this.props;
+	componentDidMount() {
+		this.forceUpdate();
+	}
 
-        let childrenWithProps = React.Children.map(children, (child) => {
-            return child ? React.cloneElement(child, { layer: this }) : null;
-        });
+	setListeners() {
+	}
 
-        return <div>{childrenWithProps}</div>;
-    }
+	setFeatures(features, options) {
+		this.updateLayer(isArray(features) ? features : [features], options);
+	}
 
-    setListeners() {}
+	updateLayer() {
+		throw new TypeError('Function must be overridden.');
+	}
 
-    setFeatures(features, options) {
-        features = isArray(features) ? features : [features];
-        this.updateLayer(features, options);
-    }
+	render() {
+		const { children } = this.props;
 
-    updateLayer(features, options) {
-        throw new TypeError("Function must be overridden.");
-    }
+		const childrenWithProps = React.Children.map(children, (child) => {
+			return child ? React.cloneElement(child, {layer: this}) : null;
+		});
 
-};
+		return <div>{childrenWithProps}</div>;
+	}
+
+}

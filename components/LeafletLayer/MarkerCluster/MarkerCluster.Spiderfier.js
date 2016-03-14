@@ -7,7 +7,7 @@ L.MarkerCluster.include({
 	_circleFootSeparation: 25, //related to circumference of circle
 	_circleStartAngle: Math.PI / 6,
 
-	_spiralFootSeparation:  28, //related to size of spiral (experiment!)
+	_spiralFootSeparation: 28, //related to size of spiral (experiment!)
 	_spiralLengthStart: 11,
 	_spiralLengthFactor: 5,
 
@@ -113,7 +113,7 @@ L.MarkerCluster.include({
 				delete m._spiderLeg;
 			}
 		}
-		
+
 		group.fire('unspiderfied', {
 			cluster: this,
 			markers: childMarkers
@@ -242,7 +242,7 @@ L.MarkerCluster.include({
 			//Move marker to new position
 			m._preSpiderfyLatlng = m._latlng;
 			m.setLatLng(newPos);
-			
+
 			if (m.clusterShow) {
 				m.clusterShow();
 			}

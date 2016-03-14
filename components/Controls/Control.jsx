@@ -1,25 +1,35 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import L from 'mapbox.js';
+
+import omit from 'lodash/omit';
 
 
 export default class Control extends Component {
 
-    shouldComponentUpdate() {
-        return false;
-    }
+	componentWillReceiveProps(props) {
+		const { position, map } = props;
 
-    render() {
-        return null;
-    }
+		const options = omit(this.props, ['map']);
 
-    getType() {
-        throw new TypeError("Function must be overridden.");
-    }
+		if (position) this.addControl(options, map);
+	}
 
-    addControl(options, map) {
-        if(map && !this.control) {
-            this.control = new L.Control[this.getType()](options).addTo(map);
-        }
-    }
+	shouldComponentUpdate() {
+		return false;
+	}
 
-};
+	getType() {
+		throw new TypeError('Function must be overridden.');
+	}
+
+	addControl(options, map) {
+		if (map && !this.control) {
+			this.control = new L.Control[this.getType()](options).addTo(map);
+		}
+	}
+
+	render() {
+		return null;
+	}
+
+}

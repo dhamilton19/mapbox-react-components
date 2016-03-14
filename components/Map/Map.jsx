@@ -12,59 +12,59 @@ import L from 'mapbox.js';
 
 export default class Map extends Component {
 
-    static propTypes = {
-        accessToken : PropTypes.string.isRequired,
-        children: PropTypes.any,
-        layer : PropTypes.string,
-        center: PropTypes.array.isRequired,
-        zoom: PropTypes.number.isRequired,
-        minZoom: PropTypes.number,
-        maxZoom: PropTypes.number,
-        zoomControl: PropTypes.bool
-    };
+	static propTypes = {
+		accessToken: PropTypes.string.isRequired,
+		center: PropTypes.array.isRequired,
+		children: PropTypes.any,
+		layer: PropTypes.string,
+		maxZoom: PropTypes.number,
+		minZoom: PropTypes.number,
+		zoom: PropTypes.number.isRequired,
+		zoomControl: PropTypes.bool
+	};
 
-    static defaultProps = {
-        layer: 'mapbox.streets',
-        zoomControl: true
-    };
+	static defaultProps = {
+		layer: 'mapbox.streets',
+		zoomControl: true
+	};
 
-    componentWillMount() {
-        L.mapbox.accessToken = this.props.accessToken;
-    }
+	componentWillMount() {
+		L.mapbox.accessToken = this.props.accessToken;
+	}
 
-    componentDidMount() {
-        const { layer, center } = this.props;
+	componentDidMount() {
+		const { layer, center } = this.props;
 
-        this.center = center;
+		this.center = center;
 
-        const options = omit(omitBy(this.props, isUndefined), ["accessToken", "layer", "children"]);
+		const options = omit(omitBy(this.props, isUndefined), ['accessToken', 'layer', 'children']);
 
-        this.map = L.mapbox.map(ReactDOM.findDOMNode(this), layer, options);
+		this.map = L.mapbox.map(ReactDOM.findDOMNode(this), layer, options);
 
-        this.forceUpdate();
-    }
+		this.forceUpdate();
+	}
 
-    componentWillReceiveProps(props) {
-        const { center } = props;
+	componentWillReceiveProps(props) {
+		const { center } = props;
 
-        if(difference(this.center, center).length > 0){
-            this.center = center;
-            this.map.setView(this.center, 9);
-        }
-    }
+		if (difference(this.center, center).length > 0) {
+			this.center = center;
+			this.map.setView(this.center, 9);
+		}
+	}
 
-    render() {
-        const { children } = this.props;
+	render() {
+		const { children } = this.props;
 
-        let childrenWithProps = React.Children.map(children, (child) => {
-            return child ? React.cloneElement(child, {map: this.map}) : null;
-        });
+		const childrenWithProps = React.Children.map(children, (child) => {
+			return child ? React.cloneElement(child, {map: this.map}) : null;
+		});
 
-        return (
-            <div id="map">
-                {childrenWithProps}
-            </div>
-        );
-    }
+		return (
+			<div id='map'>
+				{childrenWithProps}
+			</div>
+		);
+	}
 
-};
+}

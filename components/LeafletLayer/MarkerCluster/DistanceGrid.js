@@ -1,20 +1,19 @@
-
 L.DistanceGrid = function (cellSize) {
 	this._cellSize = cellSize;
 	this._sqCellSize = cellSize * cellSize;
 	this._grid = {};
-	this._objectPoint = { };
+	this._objectPoint = {};
 };
 
 L.DistanceGrid.prototype = {
 
 	addObject: function (obj, point) {
 		var x = this._getCoord(point.x),
-		    y = this._getCoord(point.y),
-		    grid = this._grid,
-		    row = grid[y] = grid[y] || {},
-		    cell = row[x] = row[x] || [],
-		    stamp = L.Util.stamp(obj);
+			y = this._getCoord(point.y),
+			grid = this._grid,
+			row = grid[y] = grid[y] || {},
+			cell = row[x] = row[x] || [],
+			stamp = L.Util.stamp(obj);
 
 		this._objectPoint[stamp] = point;
 
@@ -29,11 +28,11 @@ L.DistanceGrid.prototype = {
 	//Returns true if the object was found
 	removeObject: function (obj, point) {
 		var x = this._getCoord(point.x),
-		    y = this._getCoord(point.y),
-		    grid = this._grid,
-		    row = grid[y] = grid[y] || {},
-		    cell = row[x] = row[x] || [],
-		    i, len;
+			y = this._getCoord(point.y),
+			grid = this._grid,
+			row = grid[y] = grid[y] || {},
+			cell = row[x] = row[x] || [],
+			i, len;
 
 		delete this._objectPoint[L.Util.stamp(obj)];
 
@@ -54,7 +53,7 @@ L.DistanceGrid.prototype = {
 
 	eachObject: function (fn, context) {
 		var i, j, k, len, row, cell, removed,
-		    grid = this._grid;
+			grid = this._grid;
 
 		for (i in grid) {
 			row = grid[i];
@@ -75,11 +74,11 @@ L.DistanceGrid.prototype = {
 
 	getNearObject: function (point) {
 		var x = this._getCoord(point.x),
-		    y = this._getCoord(point.y),
-		    i, j, k, row, cell, len, obj, dist,
-		    objectPoint = this._objectPoint,
-		    closestDistSq = this._sqCellSize,
-		    closest = null;
+			y = this._getCoord(point.y),
+			i, j, k, row, cell, len, obj, dist,
+			objectPoint = this._objectPoint,
+			closestDistSq = this._sqCellSize,
+			closest = null;
 
 		for (i = y - 1; i <= y + 1; i++) {
 			row = this._grid[i];
@@ -110,7 +109,7 @@ L.DistanceGrid.prototype = {
 
 	_sqDist: function (p, p2) {
 		var dx = p2.x - p.x,
-		    dy = p2.y - p.y;
+			dy = p2.y - p.y;
 		return dx * dx + dy * dy;
 	}
 };

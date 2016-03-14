@@ -5,6 +5,6 @@ import MapPage from './components/MapPage';
 
 
 ReactDOM.render(
-    <MapPage />,
-    document.getElementById('app')
+	<MapPage />,
+	document.getElementById('app')
 );

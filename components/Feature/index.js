@@ -4,8 +4,8 @@ import Line from './Line';
 import Polygon from './Polygon';
 
 export {
-    Feature,
-    Marker,
-    Line,
-    Polygon
-}
+	Feature,
+	Marker,
+	Line,
+	Polygon
+};
