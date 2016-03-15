@@ -24,7 +24,7 @@ export default class Features extends Component {
 	renderFeatures(layer, features) {
 		if (features && features.length > 0) {
 			layer.setFeatures(features.map((feature) => {
-				return feature.toGeoJSON();
+				return feature.toGeoJson();
 			}));
 		}
 	}

@@ -4,8 +4,7 @@ import Feature from './Feature';
 export default class Marker extends Feature {
 
 	constructor({coordinates, title, description, color, size, symbol}) {
-		super(coordinates);
-		this.coordinates = coordinates;
+		super({coordinates});
 		this.title = title;
 		this.description = description;
 		this.color = color;

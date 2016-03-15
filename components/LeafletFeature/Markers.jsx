@@ -22,7 +22,7 @@ export default class Markers extends Component {
 			};
 
 			const features = markers.map((marker) => {
-				return marker.toGeoJSON();
+				return marker.toGeoJson();
 			});
 
 			layer.setFeatures(features, options);

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import L from 'mapbox.js';
 
 import omit from 'lodash/omit';
@@ -6,10 +6,15 @@ import omit from 'lodash/omit';
 
 export default class Control extends Component {
 
+	static propTypes = {
+		map: PropTypes.object,
+		position: PropTypes.string
+	};
+
 	componentWillReceiveProps(props) {
 		const { position, map } = props;
 
-		const options = omit(this.props, ['map']);
+		const options = omit(props, ['map']);
 
 		if (position) this.addControl(options, map);
 	}
@@ -19,13 +24,11 @@ export default class Control extends Component {
 	}
 
 	getType() {
-		throw new TypeError('Function must be overridden.');
+		throw new Error('Function must be overridden.');
 	}
 
 	addControl(options, map) {
-		if (map && !this.control) {
-			this.control = new L.Control[this.getType()](options).addTo(map);
-		}
+		if (map && !this.control) this.control = new L.Control[this.getType()](options).addTo(map);
 	}
 
 	render() {

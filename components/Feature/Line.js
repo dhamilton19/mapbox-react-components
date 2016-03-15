@@ -4,8 +4,7 @@ import Feature from './Feature';
 export default class Line extends Feature {
 
 	constructor({coordinates, stroke, width, opacity}) {
-		super(coordinates);
-		this.coordinates = coordinates;
+		super({coordinates});
 		this.stroke = stroke;
 		this.width = width;
 		this.opacity = opacity;
