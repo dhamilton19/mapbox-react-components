@@ -5,10 +5,9 @@ const webpackConfig = require('./webpack.config.test');
 module.exports = function (config) {
 	config.set({
 		browsers: ['Chrome'],
-		singleRun: true,
+		singleRun: false,
 		frameworks: ['mocha'],
 		files: [
-			'./node_modules/phantomjs-polyfill/bind-polyfill.js',
 			'./node_modules/babel-polyfill/dist/polyfill.js',
 			'tests.webpack.js'
 		],

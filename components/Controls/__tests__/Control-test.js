@@ -5,7 +5,20 @@ import Control from '../Control.jsx';
 
 
 describe('Control', function () {
-	it('renders as null', function () {
-		expect(true).toBe(true);
+
+	let control;
+
+	describe('#render', function () {
+
+		control = TestUtils.renderIntoDocument(<Control/>);
+
+		it('renders as null', function () {
+			expect(control).toExist();
+		});
+
+		it('renders as 1111', function () {
+			expect(TestUtils.isDOMComponent(control)).toBe(false);
+		});
 	});
+
 });
