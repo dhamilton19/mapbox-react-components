@@ -12,9 +12,7 @@ export default class Features extends Component {
 	componentWillReceiveProps(props) {
 		const { layer, list } = props;
 
-		if (layer) {
-			this.renderFeatures(layer, list);
-		}
+		if (layer) this.renderFeatures(layer, list);
 	}
 
 	shouldComponentUpdate() {

@@ -12,8 +12,7 @@ export default class Layer extends Component {
 		this.forceUpdate();
 	}
 
-	setListeners() {
-	}
+	setListeners() {}
 
 	setFeatures(features, options) {
 		this.updateLayer(isArray(features) ? features : [features], options);

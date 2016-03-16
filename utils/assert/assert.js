@@ -11,6 +11,7 @@ function assert(value) {
 
 assert.prototype.isNotEmpty = function (message) {
 	if (!isArray(this.value) || isEmpty(this.value)) throw new Error(message);
+	return true;
 };
 
 export default assert;

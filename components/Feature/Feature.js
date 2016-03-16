@@ -11,7 +11,7 @@ export default class Feature {
 	}
 
 	getType() {
-		throw new TypeError('Function must be overridden.');
+		throw new Error('Function must be overridden.');
 	}
 
 	toGeoJson() {
@@ -28,7 +28,7 @@ export default class Feature {
 	}
 
 	getProperties() {
-		throw new TypeError('Function must be overridden.');
+		throw new Error('Function must be overridden.');
 	}
 
 }
