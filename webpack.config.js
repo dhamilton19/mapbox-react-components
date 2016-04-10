@@ -27,11 +27,7 @@ module.exports = {
 			{
 				test: /(\.js|\.jsx)$/,
 				exclude: /(node_modules)/,
-				loader: 'babel',
-				query: {
-					plugins: ['transform-decorators-legacy'],
-					presets: ['es2015', 'react', 'stage-0', 'stage-2']
-				}
+				loader: 'babel'
 			},
 			{test: /\.css$/, loader: 'style-loader!css-loader'},
 			{test: /\.png$/, loader: 'file-loader'},

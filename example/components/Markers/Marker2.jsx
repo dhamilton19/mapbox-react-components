@@ -1,4 +1,4 @@
-import { Feature } from '../../../components';
+import { Feature } from '../../../src';
 
 
 export default class Marker2 extends Feature.Marker {

@@ -2,10 +2,8 @@ import config from '../../config';
 import data from '../../data';
 
 import React, { Component } from 'react';
-import map from 'lodash/map';
-import clone from 'lodash/clone';
 
-import { Map, Control, FeatureLayer, LeafletLayer, Features, Feature, LeafletFeature } from '../../../components';
+import { Map, Control, FeatureLayer, LeafletLayer, Features, Feature, LeafletFeature, LeafletMarker } from '../../../src';
 import { Marker1, Marker2 } from '../Markers';
 
 
@@ -26,7 +24,7 @@ export default class MapPage extends Component {
 
 	onButtonClick = () => {
 		const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
-		const markers = map(this.state.markers, clone);
+		const markers = [...this.state.markers];
 
 		const flag = Math.floor(Math.random() * 2) + 1;
 		let marker;
@@ -90,9 +88,9 @@ export default class MapPage extends Component {
 		const markers = [];
 		for (let i = 0; i < 10; i++) {
 			const coordinates = [Math.floor(Math.random() * 80) + 70, Math.floor(Math.random() * 39) + 36];
-			markers.push(new LeafletFeature.Marker({coordinates, popup: {content: 'heiiilo'}}));
+			markers.push(new LeafletMarker({coordinates, popup: {content: 'heiiilo'}}));
 		}
-		markers.push(new LeafletFeature.Marker({coordinates: [75, 37]}));
+		markers.push(new LeafletMarker({coordinates: [75, 37]}));
 		return markers;
 	}
 
@@ -109,13 +107,13 @@ export default class MapPage extends Component {
 					<FeatureLayer
 						onFeatureClick={this.handleFeatureClick}
 						onFeatureDblClick={this.handleFeatureDblClick}>
-						<Features.Markers list={this.state.markers}/>
+						<Features.Markers features={this.state.markers}/>
 					</FeatureLayer>
 					<FeatureLayer>
-						<Features.Lines list={this.state.lines}/>
+						<Features.Lines features={this.state.lines}/>
 					</FeatureLayer>
 					<FeatureLayer>
-						<Features.Polygons list={this.state.polygons}/>
+						<Features.Polygons features={this.state.polygons}/>
 					</FeatureLayer>
 					<LeafletLayer.LGeoJsonLayer>
 						<LeafletFeature.Markers
